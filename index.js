@@ -90,5 +90,4 @@ app.delete("/events/:id", async (req, res) => {
   }
 });
 
-// ✅ Export app for Vercel
 module.exports = app;
