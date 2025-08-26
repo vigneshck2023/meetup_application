@@ -1,6 +1,7 @@
-// api/events.js
 const express = require("express");
 const cors = require("cors");
+const serverless = require("serverless-http");
+
 const { initializeDatabase } = require("../db/db.connect");
 const Event = require("../models/event.models");
 
@@ -20,7 +21,9 @@ app.get("/", (req, res) => {
 app.post("/events", async (req, res) => {
   try {
     if (!req.body.title || !req.body.date || !req.body.venue) {
-      return res.status(400).json({ error: "Title, date, and venue are required" });
+      return res
+        .status(400)
+        .json({ error: "Title, date, and venue are required" });
     }
     const newEvent = new Event(req.body);
     await newEvent.save();
@@ -88,4 +91,5 @@ app.delete("/events/:id", async (req, res) => {
   }
 });
 
-module.exports = app;
+// ✅ Export wrapped app for Vercel
+module.exports = serverless(app);
