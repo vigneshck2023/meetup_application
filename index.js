@@ -1,6 +1,5 @@
 const express = require("express");
 const cors = require("cors");
-const serverless = require("serverless-http");
 
 const { initializeDatabase } = require("../db/db.connect");
 const Event = require("../models/event.models");
@@ -91,5 +90,5 @@ app.delete("/events/:id", async (req, res) => {
   }
 });
 
-// ✅ Export wrapped app for Vercel
-module.exports = serverless(app);
+// ✅ Export app for Vercel
+module.exports = app;

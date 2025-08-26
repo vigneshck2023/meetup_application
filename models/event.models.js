@@ -7,7 +7,7 @@ const eventSchema = new mongoose.Schema(
     type: { type: String, enum: ["Online", "Offline"], required: true },
     image: { type: String },
     description: { type: String, required: true },
-    venue: { type: String },
+    venue: { type: String, required: true },
     price: { type: Number, default: 0 },
     speakers: [
       {
