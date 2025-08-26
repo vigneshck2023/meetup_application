@@ -1,8 +1,8 @@
 const express = require("express");
 const cors = require("cors");
 
-const { initializeDatabase } = require("../db/db.connect");
-const Event = require("../models/event.models");
+const { initializeDatabase } = require("./db/db.connect");
+const Event = require("./models/event.models");
 
 const app = express();
 app.use(cors());
@@ -13,7 +13,7 @@ initializeDatabase();
 
 // root test route
 app.get("/", (req, res) => {
-  res.send("🚀 Meetup Backend is running on Vercel!");
+  res.send("🚀 Meetup Backend is running locally!");
 });
 
 // ---------------- CREATE EVENT ----------------
@@ -90,4 +90,8 @@ app.delete("/events/:id", async (req, res) => {
   }
 });
 
-module.exports = app;
+// ---------------- LISTEN LOCALLY ----------------
+const PORT = process.env.PORT || 5000;
+app.listen(PORT, () => {
+  console.log(`🚀 Server is running at http://localhost:${PORT}`);
+});
